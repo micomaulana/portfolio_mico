@@ -2,86 +2,147 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil Saya</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background-color: #f0f4f8;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            margin-left: 1rem;
+            text-decoration: none;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            padding: 2rem;
+            background-color: white;
+            align-items: center;
+        }
+
+        .hero img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .about,
+        .portfolio {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .biodata {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .biodata div {
+            background-color: #e9f1ff;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .portfolio-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .portfolio-items img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        footer {
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Section 1: Menu -->
-    <table width="100%" border="1">
-        <tr>
-            <td><strong>Brand</strong></td>
-            <td align="right">
-                <a href="#header">Header</a> |
-                <a href="#biodata">Biodata</a> |
-                <a href="#portofolio">Portofolio</a>
-            </td>
-        </tr>
-    </table>
+    <header>
+        <div><strong>Brand</strong></div>
+        <nav>
+            <a href="#hero">Header</a>
+            <a href="#about">Biodata</a>
+            <a href="#portfolio">Portofolio</a>
+        </nav>
+    </header>
 
-    <!-- Section 2: Header -->
-    <table width="100%" border="1" id="header">
-        <tr>
-            <td width="60%">
-                <h2>Selamat Datang di Website Saya</h2>
-                <p>Ini adalah contoh header dengan dua kolom. Kolom kiri berisi teks seperti ini.</p>
-                <button>Pelajari Lebih Lanjut</button>
-            </td>
-            <td width="40%" align="center">
-                <img src="https://via.placeholder.com/600x400" alt="Gambar Header">
-            </td>
-        </tr>
-    </table>
+    <section class="hero" id="hero">
+        <div>
+            <h1>Selamat Datang di Website Saya</h1>
+            <p>Ini adalah contoh header dengan dua kolom. Kolom kiri berisi teks seperti ini.</p>
+            <button>Pelajari Lebih Lanjut</button>
+        </div>
+        <div>
+            <img src="https://via.placeholder.com/300x400" alt="Foto Profil">
+        </div>
+    </section>
 
-    <!-- Section 3: Biodata -->
-    <table width="100%" border="1" id="biodata">
-        <tr>
-            <td colspan="3" align="center">
-                <h2>About Me</h2>
-                <p>A brief introduction about myself</p>
-            </td>
-        </tr>
-        <tr>
-            <td align="center">Full Name</td>
-            <td align="center">Education</td>
-            <td align="center">Pekerjaan</td>
-        </tr>
-        <tr>
-            <td align="center">Contact</td>
-            <td align="center">Hobi</td>
-            <td align="center">Alamat</td>
-        </tr>
-    </table>
+    <section class="about" id="about">
+        <h2>About Me</h2>
+        <p>A brief introduction about myself</p>
+        <div class="biodata">
+            <div><strong>Full Name:</strong> Dodi</div>
+            <div><strong>Education:</strong> S1 Informatika</div>
+            <div><strong>Pekerjaan:</strong> Programmer</div>
+            <div><strong>Contact:</strong> dodi@example.com</div>
+            <div><strong>Hobi:</strong> Membaca, Coding</div>
+            <div><strong>Alamat:</strong> Jakarta</div>
+        </div>
+    </section>
 
-    <!-- Section 4: Portofolio -->
-    <table width="100%" border="1" id="portofolio">
-        <tr>
-            <td colspan="3" align="center">
-                <h2>Portofolio</h2>
-            </td>
-        </tr>
-        <tr>
-            <td align="center">
-                <img src="https://via.placeholder.com/350x200" alt="Proyek 1"><br>
-                <strong>Proyek 1</strong><br>
-                Deskripsi proyek 1.
-            </td>
-            <td align="center">
-                <img src="https://via.placeholder.com/350x200" alt="Proyek 2"><br>
-                <strong>Proyek 2</strong><br>
-                Deskripsi proyek 2.
-            </td>
-            <td align="center">
-                <img src="https://via.placeholder.com/350x200" alt="Proyek 3"><br>
-                <strong>Proyek 3</strong><br>
-                Deskripsi proyek 3.
-            </td>
-            <td align="center">
-              <img src="https://via.placeholder.com/350x200" alt="Proyek 3"><br>
-              <strong>Proyek 4</strong><br>
-              Deskripsi proyek 4.
-          </td>
-        </tr>
-    </table>
+    <section class="portfolio" id="portfolio">
+        <h2>Portofolio</h2>
+        <div class="portfolio-items">
+            <div>
+                <img src="https://via.placeholder.com/400x200" alt="Proyek 1">
+                <p><strong>Proyek 1</strong><br>Deskripsi proyek 1</p>
+            </div>
+            <div>
+                <img src="https://via.placeholder.com/400x200" alt="Proyek 2">
+                <p><strong>Proyek 2</strong><br>Deskripsi proyek 2</p>
+            </div>
+            <div>
+                <img src="https://via.placeholder.com/400x200" alt="Proyek 3">
+                <p><strong>Proyek 3</strong><br>Deskripsi proyek 3</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2025 Dodi. All rights reserved.
+    </footer>
 
 </body>
 </html>
