@@ -1,148 +1,588 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-bs-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil Saya</title>
+    <title>Portofolio Mico Maulana</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap"
+        rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #00d4ff;
+            --secondary-color: #ff007a;
+            --accent-color: #ffeb3b;
+            --dark-bg: #0d1b2a;
+            --light-bg: #e0f7fa;
+            --hover-color: #ff4081;
+        }
+
         body {
-            margin: 0;
-            font-family: sans-serif;
-            background-color: #f0f4f8;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+            background: var(--dark-bg);
+            color: #fff;
+            position: relative;
+            transition: background 0.5s ease;
         }
 
-        header {
-            background-color: #007BFF;
-            color: white;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        [data-bs-theme="light"] body {
+            background: var(--light-bg);
+            color: #0d1b2a;
         }
 
-        nav a {
-            color: white;
-            margin-left: 1rem;
-            text-decoration: none;
+        section {
+            padding: 7rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .navbar {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            z-index: 1000;
+        }
+
+        .navbar.scrolled {
+            background: rgba(13, 27, 42, 0.95);
+            padding: 0.5rem 0;
         }
 
         .hero {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            padding: 2rem;
-            background-color: white;
-            align-items: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            padding: 12rem 0;
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero img {
-            max-width: 100%;
-            border-radius: 10px;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/noise-lines.png');
+            opacity: 0.15;
+            z-index: 0;
         }
 
-        .about,
-        .portfolio {
-            text-align: center;
-            padding: 2rem;
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
         }
 
-        .biodata {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
+        .hero .container {
+            position: relative;
+            z-index: 2;
         }
 
         .biodata div {
-            background-color: #e9f1ff;
-            padding: 1rem;
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 25px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .portfolio-items {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
+        [data-bs-theme="light"] .biodata div {
+            background: rgba(13, 27, 42, 0.1);
         }
 
-        .portfolio-items img {
+        .biodata div:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-color);
+        }
+
+        .card {
+            border: none;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease;
+            cursor: pointer;
+            position: relative;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-25px) rotate(3deg);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-img-top {
+            height: 250px;
+            object-fit: cover;
+            transition: all 0.7s ease;
+        }
+
+        .card:hover .card-img-top {
+            transform: scale(1.2) rotate(-3deg);
+            filter: brightness(1.2) saturate(1.5);
+        }
+
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            border-radius: 8px;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+            opacity: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.4s ease;
+        }
+
+        .card:hover .card-overlay {
+            opacity: 1;
         }
 
         footer {
-            background-color: #007BFF;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-            margin-top: 2rem;
+            background: linear-gradient(to top, var(--dark-bg), #1b263b);
+            color: #fff;
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .btn-custom {
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            font-weight: 700;
+            background: var(--secondary-color);
+            color: #fff;
+            border: 2px solid var(--accent-color);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-custom:hover {
+            transform: scale(1.1);
+            background: var(--hover-color);
+            box-shadow: 0 10px 30px rgba(255, 7, 122, 0.5);
+            color: var(--accent-color);
+        }
+
+        .skills-section {
+            background: linear-gradient(45deg, #1b263b, #415a77);
+            position: relative;
+        }
+
+        .skills-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.2), transparent);
+        }
+
+        .progress {
+            height: 1.8rem;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            border: 1px solid var(--primary-color);
+        }
+
+        .progress-bar {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            transition: width 1.5s ease-in-out;
+        }
+
+        .social-icons a {
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
+            transform: scale(1.3);
         }
 
         @media (max-width: 768px) {
             .hero {
-                grid-template-columns: 1fr;
-                text-align: center;
+                padding: 8rem 0;
+                clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+            }
+
+            .card {
+                margin-bottom: 2.5rem;
+            }
+
+            .biodata div {
+                margin-bottom: 1.5rem;
             }
         }
     </style>
 </head>
-<body>
 
-    <header>
-        <div><strong>Brand</strong></div>
-        <nav>
-            <a href="#hero">Header</a>
-            <a href="#about">Biodata</a>
-            <a href="#portfolio">Portofolio</a>
-        </nav>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Mico Maulana</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#hero">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">Tentang</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Keterampilan</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">Portofolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Kontak</a></li>
+                    <li class="nav-item">
+                        <button class referencing:
+                            https://github.com/fabioluciano/xai-grok-theme-toggle"class="btn btn-sm btn-light ms-3"
+                            id="toggleTheme">🌓 Mode</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero text-white text-center" id="hero">
+        <div id="particles-js"></div>
+        <div class="container" data-aos="zoom-in">
+            <h1 class="display-2 fw-bold animate__animated animate__bounceIn">Mico Maulana</h1>
+            <p class="lead mb-4 animate__animated animate__fadeInUp animate__delay-1s">Full-Stack Developer | Cloud
+                Computing Enthusiast | Bangkit 2024</p>
+            <a href="#portfolio" class="btn btn-custom animate__animated animate__pulse animate__delay-2s">Lihat Karya
+                Saya</a>
+        </div>
     </header>
 
-    <section class="hero" id="hero">
-        <div>
-            <h1>Selamat Datang di Website Saya</h1>
-            <p>Ini adalah contoh header dengan dua kolom. Kolom kiri berisi teks seperti ini.</p>
-            <button>Pelajari Lebih Lanjut</button>
-        </div>
-        <div>
-            <img src="https://via.placeholder.com/300x400" alt="Foto Profil">
-        </div>
-    </section>
-
-    <section class="about" id="about">
-        <h2>About Me</h2>
-        <p>A brief introduction about myself</p>
-        <div class="biodata">
-            <div><strong>Full Name:</strong> Dodi</div>
-            <div><strong>Education:</strong> S1 Informatika</div>
-            <div><strong>Pekerjaan:</strong> Programmer</div>
-            <div><strong>Contact:</strong> dodi@example.com</div>
-            <div><strong>Hobi:</strong> Membaca, Coding</div>
-            <div><strong>Alamat:</strong> Jakarta</div>
-        </div>
-    </section>
-
-    <section class="portfolio" id="portfolio">
-        <h2>Portofolio</h2>
-        <div class="portfolio-items">
-            <div>
-                <img src="https://via.placeholder.com/400x200" alt="Proyek 1">
-                <p><strong>Proyek 1</strong><br>Deskripsi proyek 1</p>
-            </div>
-            <div>
-                <img src="https://via.placeholder.com/400x200" alt="Proyek 2">
-                <p><strong>Proyek 2</strong><br>Deskripsi proyek 2</p>
-            </div>
-            <div>
-                <img src="https://via.placeholder.com/400x200" alt="Proyek 3">
-                <p><strong>Proyek 3</strong><br>Deskripsi proyek 3</p>
+    <!-- Tentang Saya -->
+    <section id="about">
+        <div class="container" data-aos="fade-up">
+            <h2 class="text-center mb-5 fw-bold">Tentang Saya</h2>
+            <div class="row align-items-center">
+                <div class="col-md-4 text-center" data-aos="fade-right">
+                    <img src="https://via.placeholder.com/350x350?text=Foto+Mico"
+                        class="rounded-circle shadow img-fluid" alt="Foto Mico">
+                </div>
+                <div class="col-md-8" data-aos="fade-left">
+                    <p class="lead">Saya Mico Maulana, lulusan Sistem Informasi dan peserta Bangkit Academy 2024. Saya
+                        bersemangat dalam mengembangkan solusi teknologi berbasis cloud dan web yang inovatif serta
+                        berdampak.</p>
+                    <div class="row g-4 biodata mt-4">
+                        <div class="col-md-6">Nama: Mico Maulana</div>
+                        <div class="col-md-6">Email: mmicomaulana@gmail.com</div>
+                        <div class="col-md-6">Telepon: 082184911376</div>
+                        <div class="col-md-6">Asal: Indonesia</div>
+                        <div class="col-md-6">Minat: Cloud Computing, Web Dev</div>
+                        <div class="col-md-6">Hobi: Badminton, Nonton Film</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer>
-        &copy; 2025 Dodi. All rights reserved.
+    <!-- Skills Section -->
+    <section class="skills-section" id="skills">
+        <div class="container" data-aos="fade-up">
+            <h2 class="text-center mb-5 fw-bold">Keterampilan</h2>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="flip-left">
+                    <div class="card text-center p-4">
+                        <i class="fas fa-code fa-4x mb-3" style="color: var(--primary-color);"></i>
+                        <h5>Web Development</h5>
+                        <p>HTML, CSS, JavaScript, Laravel, React</p>
+                        <div class="progress mt-3">
+                            <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="flip-left" data-aos-delay="100">
+                    <div class="card text-center p-4">
+                        <i class="fas fa-cloud fa-4x mb-3" style="color: var(--primary-color);"></i>
+                        <h5>Cloud Computing</h5>
+                        <p>Google Cloud Platform, AWS Basics</p>
+                        <div class="progress mt-3">
+                            <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="flip-left" data-aos-delay="200">
+                    <div class="card text-center p-4">
+                        <i class="fas fa-brain fa-4x mb-3" style="color: var(--primary-color);"></i>
+                        <h5>Machine Learning</h5>
+                        <p>Python, TensorFlow, Image Processing</p>
+                        <div class="progress mt-3">
+                            <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="70"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portofolio -->
+    <section id="portfolio" class="bg-light" style="background: linear-gradient(to bottom, #1b263b, #415a77);">
+        <div class="container" data-aos="zoom-in">
+            <h2 class="text-center mb-5 fw-bold">Portofolio Proyek</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card" data-bs-toggle="modal" data-bs-target="#modalKatarak">
+                        <img src="https://images.unsplash.com/photo-1576091160399-1d65cdaa8938?q=80&w=400"
+                            class="card-img-top" alt="Deteksi Katarak">
+                        <div class="card-overlay">
+                            <button class="btn btn-custom">Lihat Detail</button>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Aplikasi Deteksi Katarak</h5>
+                            <p class="card-text">Aplikasi AI untuk deteksi katarak berbasis citra mata dari Bangkit
+                                2024.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card" data-bs-toggle="modal" data-bs-target="#modalDBD">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=400"
+                            class="card-img-top" alt="WebGIS DBD">
+                        <div class="card-overlay">
+                            <button class="btn btn-custom">Lihat Detail</button>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">WebGIS DBD</h5>
+                            <p class="card-text">Pemetaan sebaran DBD berbasis Leaflet.js dan data geospasial.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card" data-bs-toggle="modal" data-bs-target="#modalPenjualan">
+                        <img src="https://images.unsplash.com/photo-1551288049-b5f3c2c8c372?q=80&w=400"
+                            class="card-img-top" alt="Penjualan">
+                        <div class="card-overlay">
+                            <button class="btn btn-custom">Lihat Detail</button>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Sistem Penjualan</h5>
+                            <p class="card-text">Manajemen stok dan penjualan berbasis Laravel & MySQL.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontak -->
+    <section id="contact">
+        <div class="container text-center" data-aos="fade-up">
+            <h2 class="mb-5 fw-bold">Kontak</h2>
+            <p>Hubungi saya atau unduh CV dan portfolio saya:</p>
+            <div class="d-flex justify-content-center gap-4 flex-wrap mb-4">
+                <a href="mailto:mmicomaulana@gmail.com" class="btn btn-custom"><i
+                        class="fas fa-envelope me-2"></i>Email</a>
+                <a href="https://wa.me/6282184911376" class="btn btn-custom"><i
+                        class="fab fa-whatsapp me-2"></i>WhatsApp</a>
+                <a href="https://linkedin.com/in/micomaulana" target="_blank" class="btn btn-custom"><i
+                        class="fab fa-linkedin me-2"></i>LinkedIn</a>
+                <a href="cv_mico_maulana.pdf" download class="btn btn-custom"><i class="fas fa-download me-2"></i>Unduh
+                    CV</a>
+                <button id="downloadPortfolio" class="btn btn-custom"><i class="fas fa-file-pdf me-2"></i>Unduh
+                    Portfolio</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <p>© 2025 Mico Maulana. All rights reserved.</p>
+            <div class="social-icons mt-3">
+                <a href="#" class="text-white mx-3"><i class="fab fa-github fa-2x"></i></a>
+                <a href="#" class="text-white mx-3"><i class="fab fa-twitter fa-2x"></i></a>
+                <a href="#" class="text-white mx-3"><i class="fab fa-instagram fa-2x"></i></a>
+            </div>
+        </div>
     </footer>
 
+    <!-- Modals -->
+    <div class="modal fade" id="modalKatarak" tabindex="-1" aria-labelledby="modalKatarakLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content"
+                style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid var(--primary-color);">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalKatarakLabel">Aplikasi Deteksi Katarak</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://images.unsplash.com/photo-1576091160399-1d65cdaa8938?q=80&w=400"
+                        class="img-fluid mb-3 rounded" alt="Deteksi Katarak">
+                    <p>Aplikasi berbasis machine learning dari Bangkit Academy yang menggunakan citra mata untuk
+                        mendeteksi katarak secara cepat dan akurat.</p>
+                    <p><strong>Teknologi:</strong> Python, TensorFlow, OpenCV</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-custom" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalDBD" tabindex="-1" aria-labelledby="modalDBDLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content"
+                style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid var(--primary-color);">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalDBDLabel">Sistem WebGIS DBD</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=400"
+                        class="img-fluid mb-3 rounded" alt="WebGIS DBD">
+                    <p>Sistem ini memetakan sebaran penyakit DBD berdasarkan wilayah kerja puskesmas menggunakan
+                        teknologi Leaflet.js dan PHP.</p>
+                    <p><strong>Teknologi:</strong> Leaflet.js, PHP, MySQL</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-custom" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalPenjualan" tabindex="-1" aria-labelledby="modalPenjualanLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content"
+                style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid var(--primary-color);">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalPenjualanLabel">Sistem Informasi Penjualan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://images.unsplash.com/photo-1551288049-b5f3c2c8c372?q=80&w=400"
+                        class="img-fluid mb-3 rounded" alt="Penjualan">
+                    <p>Sistem ini membantu UMKM mengelola stok dan transaksi penjualan barang dengan efisien,
+                        menggunakan Laravel dan MySQL.</p>
+                    <p><strong>Teknologi:</strong> Laravel, MySQL, Bootstrap</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-custom" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        AOS.init({
+            duration: 1500,
+            easing: 'ease-in-out-back',
+            once: false
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Toggle Theme
+        const toggleBtn = document.getElementById('toggleTheme');
+        toggleBtn.addEventListener('click', () => {
+            const html = document.documentElement;
+            const isDark = html.getAttribute('data-bs-theme') === 'dark';
+            html.setAttribute('data-bs-theme', isDark ? 'light' : 'dark');
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        });
+
+        // Load Saved Theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-bs-theme', savedTheme);
+
+        // Download Portfolio as PDF
+        const downloadBtn = document.getElementById('downloadPortfolio');
+        downloadBtn.addEventListener('click', () => {
+            const element = document.body;
+            const opt = {
+                margin: 0.5,
+                filename: 'Portfolio_Mico_Maulana.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save();
+        });
+
+        // Anime.js Animations
+        anime({
+            targets: '.hero h1',
+            translateY: [-100, 0],
+            opacity: [0, 1],
+            duration: 2000,
+            easing: 'easeOutElastic(1, .8)'
+        });
+
+        anime({
+            targets: '.hero p',
+            translateX: [-200, 0],
+            opacity: [0, 1],
+            duration: 1800,
+            delay: 500,
+            easing: 'easeOutExpo'
+        });
+
+        anime({
+            targets: '.hero .btn',
+            scale: [0, 1],
+            opacity: [0, 1],
+            duration: 1500,
+            delay: 1000,
+            easing: 'easeOutBounce'
+        });
+
+        // Particles.js
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#ffeb3b' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: true },
+                size: { value: 5, random: true },
+                line_linked: { enable: true, distance: 150, color: '#00d4ff', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 3, direction: 'none', random: false, straight: false, out_mode: 'out' }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } },
+                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
+    </script>
 </body>
+
 </html>
