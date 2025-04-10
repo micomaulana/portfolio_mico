@@ -29,9 +29,11 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Smooth Scroll for Navbar Links
+// Smooth Scroll for Navbar Links with Auto-Close in Mobile
 document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-link');
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
 
     navLinks.forEach(link => {
         link.addEventListener('click', function (e) {
@@ -39,6 +41,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetId = this.getAttribute('href'); // Ambil ID target (misal #education)
             const targetSection = document.querySelector(targetId);
             targetSection.scrollIntoView({ behavior: 'smooth' }); // Gulir halus
+
+            // Tutup navbar di mobile setelah klik link
+            if (window.innerWidth <= 991) { // Hanya di mode mobile (breakpoint Bootstrap)
+                if (navbarCollapse.classList.contains('show')) {
+                    navbarToggler.click(); // Simulasikan klik tombol hamburger untuk menutup
+                }
+            }
         });
     });
 });
