@@ -284,11 +284,7 @@ section {
     width: calc(100% + 40px);
     height: calc(100% + 60px);
     border: 4px solid var(--accent-color);
-    clip-path: polygon(0% 10%, 10% 0%, 90% 0%, 100% 10%,
-            /* Lengkungan atas */
-            100% 90%, 90% 100%, 10% 100%, 0% 90%
-            /* Lengkungan bawah */
-        );
+    clip-path: polygon(0% 10%, 10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%);
     animation: frameSwing 5s ease-in-out infinite;
     z-index: 1;
     box-shadow: 0 0 20px rgba(255, 235, 59, 0.5);
@@ -310,15 +306,11 @@ section {
     }
 }
 
-/* Hero Image (Lanyard Style) */
+/* Hero Image */
 .hero-image {
     width: 100%;
     height: auto;
-    clip-path: polygon(0% 10%, 10% 0%, 90% 0%, 100% 10%,
-            /* Lengkungan atas */
-            100% 90%, 90% 100%, 10% 100%, 0% 90%
-            /* Lengkungan bawah */
-        );
+    clip-path: polygon(0% 10%, 10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%);
     filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.6));
     transition: all 0.5s ease;
     z-index: 2;
@@ -432,7 +424,7 @@ section {
     }
 
     .hero h1 {
-        font-size: 3.5rem;
+        font-size: 3rem;
     }
 
     .hero .lead {
@@ -442,13 +434,15 @@ section {
 
 @media (max-width: 768px) {
     .hero {
-        padding: 8rem 0;
+        padding: 6rem 0;
+        /* Kurangi padding di mobile */
         clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
     }
 
     .hero-image-container {
-        max-width: 250px;
-        margin-top: 2rem;
+        max-width: 300px;
+        margin-bottom: 2rem;
+        /* Jarak antara foto dan teks */
     }
 
     .hero-frame {
@@ -465,11 +459,21 @@ section {
     .hero .lead {
         font-size: 1.2rem;
     }
+
+    .hero .btn-custom {
+        padding: 0.8rem 2rem;
+        /* Tombol lebih kecil di mobile */
+    }
+
+    /* Pastikan teks terpusat di mobile */
+    .hero .text-md-start {
+        text-align: center !important;
+    }
 }
 
 @media (max-width: 576px) {
     .hero-image-container {
-        max-width: 200px;
+        max-width: 250px;
     }
 
     .hero-frame {
@@ -491,19 +495,22 @@ section {
 /* ==========================================================================
    About Me (Biodata) Section - Revisi Versi Keren & Readable
    ========================================================================== */
-   #about {
-    background: var(--dark-bg); /* #0d1b2a */
+#about {
+    background: var(--dark-bg);
+    /* #0d1b2a */
     padding: 7rem 0;
     position: relative;
     overflow: hidden;
 }
 
 [data-bs-theme="light"] #about {
-    background: var(--light-bg); /* #e0f7fa */
+    background: var(--light-bg);
+    /* #e0f7fa */
 }
 
 #about h2 {
-    color: var(--accent-color); /* Kuning */
+    color: var(--accent-color);
+    /* Kuning */
     text-shadow: 0 0 20px rgba(255, 235, 59, 0.8);
     margin-bottom: 3rem;
     font-weight: 700;
